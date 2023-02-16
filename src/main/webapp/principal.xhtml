@@ -1,11 +1,59 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
 <h:head>
 	<title>Pantalla principal</title>
+	<h:outputStylesheet library="css" name="styles.css"></h:outputStylesheet>
 </h:head>
 <h:body>
-Bienvenido a la Pantalla Principal
+
+   <p:outputLabel value="Bienvenido a la Pantalla Principal"></p:outputLabel> 
+    
+    
+    <p:dataTable id="tblEmpleados" var="empleado" value="#{principalController.empleados}" paginator="true" paginatorPosition="both"
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     rowsPerPageTemplate="5,10,{ShowAll|'All'}" filteredValue="#{principalController.empleadosFiltrados}">
+		<p:column headerText="Nombre" filterBy="#{empleado.nombre}" filterMatchMode="contains">
+		
+			
+			<h:outputText value="#{empleado.nombre}"></h:outputText>
+
+		</p:column>
+		
+		<p:column headerText="Primer Apellido" filterBy="#{empleado.primerApellido}" filterMatchMode="contains">
+		
+			
+			<h:outputText value="#{empleado.primerApellido}"></h:outputText>
+
+		</p:column>
+		
+		<p:column headerText="Segundo Apellido" filterBy="#{empleado.segundoApellido}" filterMatchMode="contains">
+		
+			
+			<h:outputText value="#{empleado.segundoApellido}"></h:outputText>
+
+		</p:column>
+		
+		<p:column headerText="Puesto" filterBy="#{empleado.puesto}" filterMatchMode="contains">
+		
+			
+			<h:outputText value="#{empleado.puesto}"></h:outputText>
+
+		</p:column>
+		
+		<p:column headerText="Estatus">
+		
+			
+			<h:outputText value="HABILITADO" rendered="#{empleado.estatus}"></h:outputText>
+			<h:outputText value="INHABILITADO" rendered="#{!empleado.estatus}"></h:outputText>
+
+		</p:column>
+
+	</p:dataTable>
+
 </h:body>
 
 </html>
